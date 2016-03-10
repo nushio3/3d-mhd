@@ -1,13 +1,21 @@
-action: Codegen
-formura_version: 3aed540676dca114e9367ef1d94b0b3ca00ea8f4
-name: izanagi
+compiler_flags: []
+formura_version: 88730fa4643177ac33b0c8f6a4d151305934a795
 numerical_config:
   initial_walls:
-    x: [42]
-    y: [42]
-    z: [74]
-  intra_node_shape: [64,64,128]
+    x:
+    - 42
+    y:
+    - 42
+    z:
+    - 74
+  intra_node_shape:
+  - 64
+  - 64
+  - 128
   monitor_interval: 20
-  mpi_grid_shape: [2,2,1]
+  mpi_grid_shape:
+  - 2
+  - 2
+  - 1
   temporal_blocking_interval: 1
 sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd.fmr
