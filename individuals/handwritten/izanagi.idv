@@ -1,6 +1,6 @@
 action: Codegen
 formura_version: 3aed540676dca114e9367ef1d94b0b3ca00ea8f4
-name: default
+name: izanagi
 numerical_config:
   initial_walls:
     x: [42]
