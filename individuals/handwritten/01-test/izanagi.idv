@@ -14,7 +14,7 @@ compiler_flags:
 - -Kreduction
 - -Ksimd=2
 cpp_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd-main-prof.cpp
-fmr_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd.fmr
+fmr_sourcecode_url: https://raw.githubusercontent.com/nushio3/formura/2f8eb9c50669914e17ba24105380d0f4f631ea59/examples/3d-mhd.fmr
 formura_version: 2f8eb9c50669914e17ba24105380d0f4f631ea59
 numerical_config:
   initial_walls:

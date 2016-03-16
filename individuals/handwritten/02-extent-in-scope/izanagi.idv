@@ -1,0 +1,13 @@
+compiler_flags: ['-O3', '-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Karray_private', '-Kinstance=8', '-Kdynamic_iteration', '-Kloop_fission', '-Kloop_part_parallel', '-Kloop_part_simd', '-Keval', '-Kreduction', '-Ksimd=2']
+cpp_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd-main-prof.cpp
+fmr_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd.fmr
+formura_version: a6c9a660e3905e32f506ade58de7f6a6c28f840c
+numerical_config:
+  initial_walls:
+    x: [42]
+    y: [42]
+    z: [74]
+  intra_node_shape: [64,64,128]
+  monitor_interval: 20
+  mpi_grid_shape: [2,2,1]
+  temporal_blocking_interval: 1
