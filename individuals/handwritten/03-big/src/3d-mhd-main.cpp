@@ -75,7 +75,7 @@ int main (int argc, char **argv)
 
   double t_begin, t_end;
 
-  while(navi.time_step < T_MAX) {
+  for(;;){
     double t = wctime();
     if(navi.time_step % T_MONITOR == 0 || navi.time_step <= 3 * T_MONITOR ) {
       printf("%d step @ %lf sec\n", navi.time_step, t-t_begin);
@@ -142,7 +142,7 @@ int main (int argc, char **argv)
   }
   printf("wct = %lf sec\n",t_end - t_begin);
 
-
+  MPI_Barrier(MPI_COMM_WORLD);
   MPI_Finalize();
 
 

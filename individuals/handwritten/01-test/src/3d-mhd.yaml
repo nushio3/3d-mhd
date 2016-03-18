@@ -14,4 +14,5 @@ mpi_grid_shape:
 - 2
 - 2
 - 2
+option_strings: []
 temporal_blocking_interval: 1

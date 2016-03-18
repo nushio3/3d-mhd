@@ -14,5 +14,7 @@ mpi_grid_shape:
 - 2
 - 2
 - 2
-option_strings: []
+option_strings:
+- stick-all-comp
+- knockout-computation
 temporal_blocking_interval: 1
