@@ -1,7 +1,7 @@
 compiler_flags: ['-O3', '-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Karray_private', '-Kinstance=8', '-Kdynamic_iteration', '-Kloop_fission', '-Kloop_part_parallel', '-Kloop_part_simd', '-Keval', '-Kreduction','-Kopenmp', '-Ksimd=2']
 cpp_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd-main-prof.cpp
 fmr_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd.fmr
-formura_version: e72d53049076bd975ea4ec0070c5821377f43a95
+formura_version: a2e4f1e103bacfb3ac885bd5f645b25e64760781
 numerical_config:
   initial_walls:
     x: [44]
