@@ -1,0 +1,14 @@
+compiler_flags: ['-O3', '-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Karray_private', '-Kinstance=8', '-Kdynamic_iteration', '-Kloop_fission', '-Kloop_part_parallel', '-Kloop_part_simd', '-Keval', '-Kreduction','-Kopenmp', '-Ksimd=2']
+cpp_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d-main.cpp
+fmr_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d.fmr
+formura_version: 2df4b68f1ef97be96bedf66e0f45f48da9ae470c
+numerical_config:
+  initial_walls:
+    x: [32]
+    y: [32]
+    z: [32]
+  intra_node_shape: [64,64,64]
+  monitor_interval: 20
+  mpi_grid_shape: [2,2,2]
+  temporal_blocking_interval: 1
+  option_strings: ['stick-single-comp', 'omp', 'omp-collapse']
