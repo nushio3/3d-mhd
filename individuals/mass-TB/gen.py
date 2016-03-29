@@ -11,7 +11,7 @@ def gen(xsize, zsize, cascade,opts,tb):
     elif cascade == 1:
         xs = [xsize/2+tb]
         zs = [zsize/3+tb, (2*zsize)/3+tb]
-    dirn = "a" +str(ctr)
+    dirn = "b" +str(ctr)
     ctr+=1
     subprocess.call("mkdir " + dirn, shell = True)
     fn = dirn + "/a.idv"
@@ -35,10 +35,12 @@ numerical_config:
         fp.write(con)
 
 optss = []
-optss.append(['stick-single-comp', 'omp','omp-collapse', 'no-subroutine'])
-optss.append(['stick-single-comp', 'omp','omp-collapse'])
-optss.append(['stick-single-comp', 'no-subroutine'])
-optss.append(['stick-single-comp'])
+# optss.append(['stick-single-comp', 'omp','omp-collapse', 'no-subroutine'])
+# optss.append(['stick-single-comp', 'omp','omp-collapse'])
+# optss.append(['stick-single-comp', 'no-subroutine'])
+# optss.append(['stick-single-comp'])
+optss.append(['stick-all-comp', 'omp','omp-collapse'])
+optss.append(['stick-all-comp'])
 
 for xsize in [64,128,256]:
     for zsize in [64,128,256]:
