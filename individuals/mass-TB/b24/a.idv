@@ -7,7 +7,7 @@ numerical_config:
   initial_walls:
     x: [33]
     y: [33]
-    z: [43, 86]
+    z: [65]
   intra_node_shape: [64,64,128]
   monitor_interval: 40
   mpi_grid_shape: [2,2,2]

@@ -40,6 +40,7 @@ optss = []
 # optss.append(['stick-single-comp', 'no-subroutine'])
 # optss.append(['stick-single-comp'])
 optss.append(['stick-all-comp', 'omp','omp-collapse'])
+optss.append(['stick-all-comp', 'omp','omp-collapse', 'no-subroutine'])
 optss.append(['stick-all-comp'])
 
 for xsize in [64,128,256]:

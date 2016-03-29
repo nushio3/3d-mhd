@@ -7,9 +7,9 @@ numerical_config:
   initial_walls:
     x: [33]
     y: [33]
-    z: [22, 43]
+    z: [33]
   intra_node_shape: [64,64,64]
   monitor_interval: 40
   mpi_grid_shape: [2,2,2]
   temporal_blocking_interval: 1
-  option_strings: ['stick-all-comp', 'omp', 'omp-collapse']
+  option_strings: ['stick-all-comp']

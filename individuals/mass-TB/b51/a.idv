@@ -5,10 +5,10 @@ fmr_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d.fmr
 formura_version: 2f72606ab12501f67d8069d325c1304c60039d87
 numerical_config:
   initial_walls:
-    x: [72]
-    y: [72]
-    z: [72]
-  intra_node_shape: [128,128,128]
+    x: [40]
+    y: [40]
+    z: [136]
+  intra_node_shape: [64,64,256]
   monitor_interval: 40
   mpi_grid_shape: [2,2,2]
   temporal_blocking_interval: 8

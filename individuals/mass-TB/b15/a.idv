@@ -12,4 +12,4 @@ numerical_config:
   monitor_interval: 40
   mpi_grid_shape: [2,2,2]
   temporal_blocking_interval: 8
-  option_strings: ['stick-all-comp']
+  option_strings: ['stick-all-comp', 'omp', 'omp-collapse']
