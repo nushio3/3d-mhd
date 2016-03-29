@@ -18,8 +18,8 @@ def gen(xsize, zsize, cascade,opts,tb):
     with open(fn,"w") as fp:
         con = """
 compiler_flags: ['-O3', '-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Karray_private', '-Kinstance=8', '-Kdynamic_iteration', '-Kloop_fission', '-Kloop_part_parallel', '-Kloop_part_simd', '-Keval', '-Kreduction','-Kopenmp', '-Ksimd=2']
-cpp_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd-main-prof.cpp
-fmr_sourcecode_url: /home/nushio/hub/formura/examples/3d-mhd.fmr
+cpp_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d-main.cpp
+fmr_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d.fmr
 formura_version: 2f72606ab12501f67d8069d325c1304c60039d87
 numerical_config:
   initial_walls:
