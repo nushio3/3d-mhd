@@ -9,7 +9,7 @@ numerical_config:
     y: [96]
     z: [96]
   intra_node_shape: [128,128,128]
-  monitor_interval: 40
+  monitor_interval: 64
   mpi_grid_shape: [2,2,2]
   temporal_blocking_interval: 32
   option_strings: ['stick-all-comp', 'omp', 'omp-collapse']
