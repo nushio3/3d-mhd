@@ -33,7 +33,7 @@ numerical_config:
     y: {xs}
     z: {zs}
   intra_node_shape: [{x},{x},{z}]
-  monitor_interval: 40
+  monitor_interval: 64
   mpi_grid_shape: [2,2,2]
   temporal_blocking_interval: {tb}
   option_strings: {opts}
