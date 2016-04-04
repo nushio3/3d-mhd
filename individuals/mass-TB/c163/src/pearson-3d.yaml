@@ -1,0 +1,19 @@
+initial_walls:
+  x:
+  - 72
+  y:
+  - 72
+  z:
+  - 136
+intra_node_shape:
+- 128
+- 128
+- 256
+monitor_interval: 64
+mpi_grid_shape:
+- 2
+- 2
+- 2
+option_strings:
+- stick-single-comp
+temporal_blocking_interval: 8
