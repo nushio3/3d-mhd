@@ -17,7 +17,7 @@ def gen(xsize, zsize, cascade,opts,tb):
             return
         if zsize/3 <= tb:
             return
-    dirn = "p-sv57-" +str(ctr)
+    dirn = "p-sv57-29-" +str(ctr)
     ctr+=1
     subprocess.call("mkdir " + dirn, shell = True)
     fn = dirn + "/a.idv"
@@ -52,15 +52,15 @@ optss.append(['stick-single-comp', 'omp','omp-collapse', 'no-subroutine'])
 
 
 for opts in optss:
-    for xsize in [32,48,56,62,64,66,72]:
-        for zsize in [480,512,544,640]:
+    for xsize in [40,44,48,50,52,56,60]:
+        for zsize in [480,512,544,576,640]:
             if xsize >= zsize/4:
                 continue
             for cascade in [0,1]:
 
                 for tb in [8,10,12,16]:
                     err_ctr=0
-                    if xsize != 64:
+                    if xsize != 48:
                         err_ctr+=1
                     if zsize != 512:
                         err_ctr+=1
