@@ -3,7 +3,7 @@ compiler_flags: ['-O3', '-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Kar
 cpp_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d-main.cpp
 fmr_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d-0M.fmr
 base_filename: pearson-3d.fmr
-formura_version: 2f72606ab12501f67d8069d325c1304c60039d87
+formura_version: eb8932d46ef58bceb7dcdf2d256e472b53ba8a58
 numerical_config:
   initial_walls:
     x: [24]
