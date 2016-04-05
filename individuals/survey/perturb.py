@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import subprocess,yaml,os
+import subprocess,yaml,os,random
 
 global ctr
 ctr=0
@@ -19,7 +19,7 @@ def gen(xsize, zsize, cascade,opts,tb):
             return
     dirn = ''
     while True:
-        dirn = "TEST-q" +str(ctr)
+        dirn = "pt-" +str(ctr)
         if not(os.path.exists(dirn)):
             break
         ctr+=1
@@ -58,11 +58,30 @@ optss.append(['stick-all-comp', 'omp','omp-collapse', 'no-subroutine'])
 
 p = subprocess.Popen('./find-flops.sh', shell=True, stdout=subprocess.PIPE)
 stdout_data, stderr_data = p.communicate()
-best_dir = stdout_data.split('\n')[-2].split()[1].split('/')[0]
+canditates = stdout_data.split('\n')
+
+choice = random.random()
+best_idx=-2
+if choice < 0.2:
+    best_idx=-2
+elif choice < 0.3:
+    best_idx = int(len(canditates)*random.random())
+else:
+    decay = 0.001 ** random.random()
+    while random.random() > decay:
+        best_idx -= 1
+
+if best_idx <= -len(canditates):
+    best_idx=-2
+
+best_dir = canditates[best_idx].split()[1].split('/')[0]
 best_idv_file = best_dir + '/a.idv'
 with open(best_idv_file, 'r') as fp:
     best_yaml = yaml.load(fp)
-print best_yaml
+print best_idx, best_yaml
+
+
+
 
 xsize0 = best_yaml['numerical_config']['intra_node_shape'][0]
 zsize0 = best_yaml['numerical_config']['intra_node_shape'][2]
