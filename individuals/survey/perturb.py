@@ -111,6 +111,6 @@ for opts in optss:
                         err_ctr+=1
                     if tb != tb0:
                         err_ctr+=1
-                    if err_ctr>=2:
+                    if err_ctr>=3 or (err_ctr==2 && random.random() >0.05):
                         continue
                     gen(xsize,zsize,cascade,opts,tb)
