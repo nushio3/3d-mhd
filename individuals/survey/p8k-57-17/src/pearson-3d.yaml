@@ -1,0 +1,21 @@
+initial_walls:
+  x:
+  - 38
+  y:
+  - 38
+  z:
+  - 264
+intra_node_shape:
+- 60
+- 60
+- 512
+monitor_interval: 64
+mpi_grid_shape:
+- 2
+- 2
+- 2
+option_strings:
+- stick-all-comp
+- omp
+- omp-collapse
+temporal_blocking_interval: 8
