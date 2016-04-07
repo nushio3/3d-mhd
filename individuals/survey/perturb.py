@@ -5,7 +5,7 @@ compiler_flags0 = ['-O3', '-Kfast','-Kparallel','-Kfast,parallel', '-Kocl', '-Kl
 
 global ctr
 ctr=0
-def gen(flags,xsize, zsize, cascade,opts,tb):
+def gen(best_yaml,flags,xsize, zsize, cascade,opts,tb):
     global ctr
     if cascade == 0:
         xs = [xsize/2+tb]
@@ -31,10 +31,10 @@ def gen(flags,xsize, zsize, cascade,opts,tb):
     with open(fn,"w") as fp:
         con = """
 compiler_flags: {flags}
-cpp_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d-main.cpp
-fmr_sourcecode_url: /home/nushio/hub/formura/examples/pearson-3d-0M.fmr
+cpp_sourcecode_url: {cpp_sourcecode_url}
+fmr_sourcecode_url: {fmr_sourcecode_url}
 base_filename: pearson-3d.fmr
-formura_version: 8a1959c23ff159e47b70b5c71cd21e4ebb609758
+formura_version: {formura_version}
 numerical_config:
   initial_walls:
     x: {xs}
@@ -45,7 +45,10 @@ numerical_config:
   mpi_grid_shape: [2,2,2]
   temporal_blocking_interval: {tb}
   option_strings: {opts}
-""".format(flags=flags,xs=xs,zs=zs, x=xsize,z=zsize,opts=opts,tb=tb)
+""".format(flags=flags,xs=xs,zs=zs, x=xsize,z=zsize,opts=opts,tb=tb,
+           formura_version=best_yaml['formura_version'],
+           fmr_sourcecode_url=best_yaml['fmr_sourcecode_url'],
+           cpp_sourcecode_url=best_yaml['cpp_sourcecode_url'])
         fp.write(con)
 
 optss = []
@@ -75,7 +78,7 @@ else:
 
 if best_idx <= -len(canditates):
     best_idx=-2
-best_idx=-2
+
 
 best_dir = canditates[best_idx].split()[1].split('/')[0]
 print best_dir
@@ -134,4 +137,4 @@ for flags in flagss:
                         err_ctr+=1
                     if err_ctr>=3 or (err_ctr==2 and random.random() >0.05):
                         continue
-                    gen(flags,xsize,zsize,cascade,opts,tb)
+                    gen(best_yaml,flags,xsize,zsize,cascade,opts,tb)
