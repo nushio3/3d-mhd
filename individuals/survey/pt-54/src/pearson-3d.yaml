@@ -15,7 +15,7 @@ mpi_grid_shape:
 - 2
 - 2
 option_strings:
-- stick-all-comp
+- stick-single-comp
 - omp
 - omp-collapse
 - no-subroutine

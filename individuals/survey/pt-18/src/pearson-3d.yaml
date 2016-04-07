@@ -1,14 +1,14 @@
 initial_walls:
   x:
-  - 48
+  - 36
   y:
-  - 48
+  - 36
   z:
-  - 273
+  - 260
 intra_node_shape:
 - 64
 - 64
-- 514
+- 512
 monitor_interval: 64
 mpi_grid_shape:
 - 2
@@ -19,4 +19,4 @@ option_strings:
 - omp
 - omp-collapse
 - no-subroutine
-temporal_blocking_interval: 16
+temporal_blocking_interval: 4
