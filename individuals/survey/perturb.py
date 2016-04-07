@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import subprocess,yaml,os,random
+import subprocess,yaml,os,random,sys
 
 compiler_flags0 = ['-O3', '-Kfast','-Kparallel','-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Karray_private', '-Kinstance=8', '-Kdynamic_iteration', '-Kloop_fission', '-Kloop_part_parallel', '-Kloop_part_simd', '-Keval', '-Kreduction','-Kopenmp', '-Ksimd=2']
 
@@ -83,6 +83,10 @@ if best_idx <= -len(canditates):
 best_dir = canditates[best_idx].split()[1].split('/')[0]
 print best_dir
 best_idv_file = best_dir + '/a.idv'
+
+if len(sys.argv) >=2:
+    best_idv_file = sys.argv[1]
+
 with open(best_idv_file, 'r') as fp:
     best_yaml = yaml.load(fp)
 print best_idx, best_yaml
