@@ -2,7 +2,7 @@ import subprocess
 
 global ctr
 ctr=0
-def gen(xsize, zsize, cascade,opts,tb):
+def gen(opttag,xsize, zsize, cascade,opts,tb):
     global ctr
     if cascade == 0:
         xs = [xsize/2+tb]
@@ -24,7 +24,7 @@ def gen(xsize, zsize, cascade,opts,tb):
         zs = [zsize/2+tb]
         if xsize <= 3*tb:
             return
-    dirn = "tri" +str(ctr)
+    dirn = "tri" +opttag + str(ctr)
     ctr+=1
     subprocess.call("mkdir " + dirn, shell = True)
     fn = dirn + "/a.idv"
@@ -49,19 +49,29 @@ numerical_config:
         fp.write(con)
 
 optss = []
-optss.append(['stick-single-comp', 'omp','omp-collapse'])
-optss.append(['stick-all-comp', 'omp','omp-collapse'])
-optss.append(['stick-all-comp', 'omp','omp-collapse', 'no-subroutine'])
 optss.append(['stick-single-comp', 'omp','omp-collapse', 'no-subroutine'])
+#optss.append(['stick-all-comp', 'omp','omp-collapse', 'no-subroutine'])
+#optss.append(['stick-single-comp', 'omp','omp-collapse'])
+#optss.append(['stick-all-comp', 'omp','omp-collapse'])
 # optss.append(['stick-single-comp', 'no-subroutine'])
 # optss.append(['stick-single-comp'])
 # optss.append(['stick-all-comp'])
 
 for opts in optss:
+    opttag = ''
+    if 'stick-single-comp' in opts:
+        opttag += 'S'
+    else:
+        opttag += 'A'
+    if 'no-subroutine' in opts:
+        opttag += 'N'
+    else:
+        opttag += 'Y'
+
     for xsize in [32,64,128]:
         for zsize in [128,256,512,1024]:
             if xsize >= zsize/4:
                 continue
             for cascade in [2]:
                 for tb in [8,16,24]:
-                    gen(xsize,zsize,cascade,opts,tb)
+                    gen(opttag,xsize,zsize,cascade,opts,tb)
