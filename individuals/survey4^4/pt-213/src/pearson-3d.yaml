@@ -1,15 +1,15 @@
 initial_walls:
   x:
-  - 39
+  - 29
+  - 50
   y:
-  - 39
+  - 40
   z:
-  - 178
-  - 348
+  - 263
 intra_node_shape:
-- 63
-- 63
-- 511
+- 64
+- 64
+- 510
 monitor_interval: 64
 mpi_grid_shape:
 - 4
