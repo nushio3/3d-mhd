@@ -158,7 +158,7 @@ for f in compiler_flags0:
 
 
 for flags in flagss:
- for monitor_interval in [monitor_interval0,monitor_interval*2]
+ for monitor_interval in [monitor_interval0,monitor_interval0*2]:
   for opts in optss:
     for xsize in [xsize0/2,xsize0-8,xsize0-2,xsize0-1,xsize0,xsize0+1,xsize0+2,xsize0+8,xsize0*2]:
       for ysize in [ysize0/2,ysize0-8,ysize0-2,ysize0-1,ysize0,ysize0+1,ysize0+2,ysize0+8,ysize0*2]:
@@ -174,7 +174,7 @@ for flags in flagss:
                     err_ctr=0
                     if sorted(flags) != sorted(flags0):
                         err_ctr+=1
-                    if monitor_interval != monitor_interval0;
+                    if monitor_interval != monitor_interval0:
                         err_ctr+=1
                     if cascade != cascade0:
                         err_ctr+=1
@@ -190,5 +190,4 @@ for flags in flagss:
                         err_ctr+=1
                     if err_ctr>=3 or (err_ctr==2 and random.random() >0.01):
                         continue
-                    print xsize, ysize, zsize
                     gen(best_yaml,flags,monitor_interval, xsize,ysize,zsize,cascade,opts,tb)
