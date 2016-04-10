@@ -1,7 +1,19 @@
 #!/usr/bin/env python
 import subprocess,yaml,os,random,sys
 
-compiler_flags0 = ['-O3', '-Kfast','-Kparallel','-Kfast,parallel', '-Kocl', '-Klib', '-Koptmsg=2', '-Karray_private', '-Kinstance=8', '-Kdynamic_iteration', '-Kloop_fission', '-Kloop_part_parallel', '-Kloop_part_simd', '-Keval', '-Kreduction','-Kopenmp', '-Ksimd=2']
+compiler_flags0 = ['-O3',,'-KNOFLTLD', '-Kpic','-KPIC','-KXFILL','-Kalias_const','-Karray_private','-Kdalign', '-Kdynamic_iteration','-Keval',
+                   '-Kfast','-Kfsimple','-Kinstance=8','-Kipo','-Kloop_blocking','-Kloop_fission','-Kloop_fission_if',  '-Kloop_part_simd',
+                   '-Kloop_interchange','-Kloop_part_parallel',
+                   '-Kmemalias','-Kmfunc=1','-Kmfunc=2','-Kmfunc=3','-Kordered_omp_reduction',
+                   '-Kparallel','-Kparallel_strong','-Kfast,parallel', '-Kpreex',
+                   '-Kprefetch_conditional', '-Kprefetch_indirect','-Kprefetch_infer','-Kprefetch_stride',
+                   '-Kprefetch_strong', '-Kprefetch_strong_L2','-Kreduction','-Kregion_extension','-Krestp=all',
+                   '-Ksimd_region_constant', '-Kstriping', '-Kswp_strong','-Kuxsimd',
+                   '-Kocl', '-Klib', '-Koptmsg=2',  '-Kdynamic_iteration',  '-Kopenmp', '-Ksimd=2']
+
+# -Kfast = -O3 -Kdalign,ns,mfunc,lib,eval,rdconv,prefetch_conditional,ilfunc,fp_contract,fp_relaxed,fast_matmul -x-
+
+
 
 global ctr
 ctr=0
