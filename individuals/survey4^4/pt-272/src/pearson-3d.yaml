@@ -1,11 +1,11 @@
 initial_walls:
   x:
-  - 40
+  - 29
+  - 50
   y:
   - 40
   z:
-  - 178
-  - 349
+  - 264
 intra_node_shape:
 - 64
 - 64
