@@ -17,31 +17,41 @@ compiler_flags0 = ['-O3','-KNOFLTLD', '-Kpic','-KPIC','-KXFILL','-Kalias_const',
 
 global ctr
 ctr=0
-def gen(best_yaml,flags,xsize, zsize, cascade,opts,tb):
+def gen(best_yaml,flags,xsize, ysize, zsize, cascade,opts,tb):
     global ctr
     if cascade == 0:
         xs = [xsize/2+tb]
-        ys = xs
+        ys = [ysize/2+tb]
         zs = [zsize/2+tb]
         if xsize/2 <= tb:
             return
+        if ysize/2 <= tb:
+            return
+        if zsize/2 <= tb:
+            return
     elif cascade == 1:
         xs = [xsize/2+tb]
-        ys = xs
+        ys = [ysize/2+tb]
         zs = [zsize/3+tb, (2*zsize)/3+tb]
         if xsize <= 2*tb:
+            return
+        if ysize/2 <= tb:
             return
         if zsize/3 <= tb:
             return
     elif cascade == 2:
         xs = [xsize/3+tb, (2*xsize)/3+tb]
-        ys = [xsize/2+tb]
+        ys = [ysize/2+tb]
         zs = [zsize/2+tb]
         if xsize <= 3*tb:
             return
+        if ysize/2 <= tb:
+            return
+        if zsize/2 <= tb:
+            return
     dirn = ''
     while True:
-        dirn = "pt-" +str(ctr)
+        dirn = "pta-" +str(ctr)
         if not(os.path.exists(dirn)):
             break
         ctr+=1
@@ -60,12 +70,12 @@ numerical_config:
     x: {xs}
     y: {ys}
     z: {zs}
-  intra_node_shape: [{x},{x},{z}]
+  intra_node_shape: [{x},{y},{z}]
   monitor_interval: 64
   mpi_grid_shape: [4,4,4]
   temporal_blocking_interval: {tb}
   option_strings: {opts}
-""".format(flags=flags,xs=xs,ys=ys,zs=zs, x=xsize,z=zsize,opts=opts,tb=tb,
+""".format(flags=flags,xs=xs,ys=ys,zs=zs, x=xsize,y=ysize,z=zsize,opts=opts,tb=tb,
            formura_version=best_yaml['formura_version'],
            fmr_sourcecode_url=best_yaml['fmr_sourcecode_url'],
            cpp_sourcecode_url=best_yaml['cpp_sourcecode_url'])
@@ -118,6 +128,7 @@ print  best_yaml
 
 flags0 = best_yaml['compiler_flags']
 xsize0 = best_yaml['numerical_config']['intra_node_shape'][0]
+ysize0 = best_yaml['numerical_config']['intra_node_shape'][1]
 zsize0 = best_yaml['numerical_config']['intra_node_shape'][2]
 tb0 = best_yaml['numerical_config']['temporal_blocking_interval']
 opts0 = best_yaml['numerical_config']['option_strings']
@@ -130,7 +141,7 @@ elif len(best_yaml['numerical_config']['initial_walls']['z'])>=2:
 else:
     cascade0 = 0
 
-print flags0, xsize0, zsize0, tb0, opts0
+print flags0, xsize0,ysize0,  zsize0, tb0, opts0
 print 'cascade:', cascade0
 
 
@@ -147,6 +158,7 @@ for f in compiler_flags0:
 for flags in flagss:
   for opts in optss:
     for xsize in [xsize0/2,xsize0-8,xsize0-2,xsize0-1,xsize0,xsize0+1,xsize0+2,xsize0+8,xsize0*2]:
+      for ysize in [ysize0/2,ysize0-8,ysize0-2,ysize0-1,ysize0,ysize0+1,ysize0+2,ysize0+8,ysize0*2]:
         for zsize in [zsize0/2,zsize0-8,zsize0-2,zsize0-1,zsize0,zsize0+1,zsize0+2,zsize0+8,zsize0*2]:
             if xsize >= zsize/4 or xsize<=0 or zsize<=0:
                 continue
@@ -165,10 +177,13 @@ for flags in flagss:
                         err_ctr+=1
                     if xsize != xsize0:
                         err_ctr+=1
+                    if ysize != ysize0:
+                        err_ctr+=1
                     if zsize != zsize0:
                         err_ctr+=1
                     if tb != tb0:
                         err_ctr+=1
-                    if err_ctr>=3 or (err_ctr==2 and random.random() >0.05):
+                    if err_ctr>=3 or (err_ctr==2 and random.random() >0.01):
                         continue
-                    gen(best_yaml,flags,xsize,zsize,cascade,opts,tb)
+                    print xsize, ysize, zsize
+                    gen(best_yaml,flags,xsize,ysize,zsize,cascade,opts,tb)
