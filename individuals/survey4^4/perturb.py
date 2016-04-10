@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import subprocess,yaml,os,random,sys
 
-compiler_flags0 = ['-O3',,'-KNOFLTLD', '-Kpic','-KPIC','-KXFILL','-Kalias_const','-Karray_private','-Kdalign', '-Kdynamic_iteration','-Keval',
+compiler_flags0 = ['-O3','-KNOFLTLD', '-Kpic','-KPIC','-KXFILL','-Kalias_const','-Karray_private','-Kdalign', '-Kdynamic_iteration','-Keval',
                    '-Kfast','-Kfsimple','-Kinstance=8','-Kipo','-Kloop_blocking','-Kloop_fission','-Kloop_fission_if',  '-Kloop_part_simd',
                    '-Kloop_interchange','-Kloop_part_parallel',
                    '-Kmemalias','-Kmfunc=1','-Kmfunc=2','-Kmfunc=3','-Kordered_omp_reduction',
