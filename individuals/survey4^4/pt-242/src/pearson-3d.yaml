@@ -1,6 +1,7 @@
 initial_walls:
   x:
-  - 40
+  - 29
+  - 50
   y:
   - 40
   z:
