@@ -51,7 +51,7 @@ def gen(best_yaml,flags,monitor_interval,xsize, ysize, zsize, cascade,opts,tb):
             return
     dirn = ''
     while True:
-        dirn = "ptb-" +str(ctr)
+        dirn = "ptc-" +str(ctr)
         if not(os.path.exists(dirn)):
             break
         ctr+=1
@@ -158,7 +158,7 @@ for f in compiler_flags0:
 
 
 for flags in flagss:
- for monitor_interval in [monitor_interval0,monitor_interval0*2]:
+ for monitor_interval in [monitor_interval0,monitor_interval0*2,monitor_interval0/2]:
   for opts in optss:
     for xsize in [xsize0/2,xsize0-8,xsize0-2,xsize0-1,xsize0,xsize0+1,xsize0+2,xsize0+8,xsize0*2]:
       for ysize in [ysize0/2,ysize0-8,ysize0-2,ysize0-1,ysize0,ysize0+1,ysize0+2,ysize0+8,ysize0*2]:
