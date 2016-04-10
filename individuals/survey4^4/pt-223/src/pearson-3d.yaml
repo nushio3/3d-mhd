@@ -1,11 +1,11 @@
 initial_walls:
   x:
-  - 36
+  - 37
+  - 58
   y:
-  - 36
+  - 48
   z:
-  - 174
-  - 345
+  - 272
 intra_node_shape:
 - 64
 - 64
@@ -20,4 +20,4 @@ option_strings:
 - omp
 - omp-collapse
 - no-subroutine
-temporal_blocking_interval: 4
+temporal_blocking_interval: 16
