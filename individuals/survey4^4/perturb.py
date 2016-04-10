@@ -17,7 +17,7 @@ compiler_flags0 = ['-O3','-KNOFLTLD', '-Kpic','-KPIC','-KXFILL','-Kalias_const',
 
 global ctr
 ctr=0
-def gen(best_yaml,flags,xsize, ysize, zsize, cascade,opts,tb):
+def gen(best_yaml,flags,monitor_interval,xsize, ysize, zsize, cascade,opts,tb):
     global ctr
     if cascade == 0:
         xs = [xsize/2+tb]
@@ -51,7 +51,7 @@ def gen(best_yaml,flags,xsize, ysize, zsize, cascade,opts,tb):
             return
     dirn = ''
     while True:
-        dirn = "pta-" +str(ctr)
+        dirn = "ptb-" +str(ctr)
         if not(os.path.exists(dirn)):
             break
         ctr+=1
@@ -71,12 +71,13 @@ numerical_config:
     y: {ys}
     z: {zs}
   intra_node_shape: [{x},{y},{z}]
-  monitor_interval: 64
+  monitor_interval: {monitor_interval}
   mpi_grid_shape: [4,4,4]
   temporal_blocking_interval: {tb}
   option_strings: {opts}
 """.format(flags=flags,xs=xs,ys=ys,zs=zs, x=xsize,y=ysize,z=zsize,opts=opts,tb=tb,
            formura_version=best_yaml['formura_version'],
+           monitor_interval=monitor_interval,
            fmr_sourcecode_url=best_yaml['fmr_sourcecode_url'],
            cpp_sourcecode_url=best_yaml['cpp_sourcecode_url'])
         fp.write(con)
@@ -131,6 +132,7 @@ xsize0 = best_yaml['numerical_config']['intra_node_shape'][0]
 ysize0 = best_yaml['numerical_config']['intra_node_shape'][1]
 zsize0 = best_yaml['numerical_config']['intra_node_shape'][2]
 tb0 = best_yaml['numerical_config']['temporal_blocking_interval']
+monitor_interval0= best_yaml['numerical_config']['monitor_interval']
 opts0 = best_yaml['numerical_config']['option_strings']
 
 cascade0 = 2
@@ -156,6 +158,7 @@ for f in compiler_flags0:
 
 
 for flags in flagss:
+ for monitor_interval in [monitor_interval0,monitor_interval*2]
   for opts in optss:
     for xsize in [xsize0/2,xsize0-8,xsize0-2,xsize0-1,xsize0,xsize0+1,xsize0+2,xsize0+8,xsize0*2]:
       for ysize in [ysize0/2,ysize0-8,ysize0-2,ysize0-1,ysize0,ysize0+1,ysize0+2,ysize0+8,ysize0*2]:
@@ -170,6 +173,8 @@ for flags in flagss:
 
                     err_ctr=0
                     if sorted(flags) != sorted(flags0):
+                        err_ctr+=1
+                    if monitor_interval != monitor_interval0;
                         err_ctr+=1
                     if cascade != cascade0:
                         err_ctr+=1
@@ -186,4 +191,4 @@ for flags in flagss:
                     if err_ctr>=3 or (err_ctr==2 and random.random() >0.01):
                         continue
                     print xsize, ysize, zsize
-                    gen(best_yaml,flags,xsize,ysize,zsize,cascade,opts,tb)
+                    gen(best_yaml,flags,monitor_interval, xsize,ysize,zsize,cascade,opts,tb)
