@@ -10,7 +10,7 @@ def read_cmd(cmd):
     stdout_data, stderr_data = p.communicate()
     return stdout_data
 
-fns = read_cmd('ls */out/output_prof_*.txt').split('\n')
+fns = read_cmd('ls bench-scaling-new/*/out/output_prof_*.txt').split('\n')
 
 def f(x):
     return str(dc.Decimal(x)+0)
@@ -28,7 +28,7 @@ for fn in fns:
         gflips = 0
         gbps = 0
 
-        key = fn.split('/')[0]
+        key = fn.split('/')[1]
         for i in range(len(lines)):
             if re.search("MFLOPS\/PEAK",lines[i]):
                 if re.search("main 0",lines[i+2]):
