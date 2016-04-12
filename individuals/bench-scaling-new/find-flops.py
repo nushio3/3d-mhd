@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import re, sys
+import re, sys,subprocess
 
 for fn in sys.argv[1:]:
     with open(fn,"r") as fp:
@@ -8,6 +8,6 @@ for fn in sys.argv[1:]:
         lines = con.split("\n")
         for i in range(len(lines)):
             if re.search("MFLOPS\/PEAK",lines[i]):
-                print lines[i+2].split()[3], fn
-                break
-
+                if re.search("main 0",lines[i+2]):
+                    print lines[i+2].split()[3], fn
+                    break
