@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import re,subprocess
+import decimal as dc
+
+dc.getcontext().prec=4
 
 def read_cmd(cmd):
     p = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE)
@@ -10,6 +13,11 @@ def read_cmd(cmd):
 
 fns = read_cmd('ls */out/output_prof_*.txt').split('\n')
 
+def f(x):
+    return str(dc.Decimal(x)+0)
+def p(x):
+    return f(x*100) + '\%'
+
 for fn in fns:
     if fn=='': continue
     with open(fn,"r") as fp:
@@ -18,6 +26,8 @@ for fn in fns:
 
         gflips = 0
         gbps = 0
+
+        fnbody = fn.split('/')[0]
         for i in range(len(lines)):
             if re.search("MFLOPS\/PEAK",lines[i]):
                 if re.search("main 0",lines[i+2]):
@@ -29,4 +39,4 @@ for fn in fns:
                     gbps=float(lines[i+2].split()[2])
                     break
         if gbps==0: continue
-        print gflips, fn, gbps,  gflips, gflips/gbps
+        print ' & '.join([fnbody,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)])
