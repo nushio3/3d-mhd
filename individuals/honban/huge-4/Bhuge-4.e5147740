@@ -1,0 +1,90 @@
++ . /work/system/Env_base
+++ GMVERSION=1.2.0-19
+++ export Env_base=K-1.2.0-19
+++ Env_base=K-1.2.0-19
++++ /bin/uname -m
+++ '[' s64fx = s64fx ']'
+++ export MPI_HOME=/opt/FJSVtclang/GM-1.2.0-19
+++ MPI_HOME=/opt/FJSVtclang/GM-1.2.0-19
+++ export TOFU_HOME=/opt/FJSVpxtof/sparc64fx
+++ TOFU_HOME=/opt/FJSVpxtof/sparc64fx
+++ export PATH=/opt/FJSVtclang/GM-1.2.0-19/bin:/usr/local/bin:/bin:/usr/bin:/opt/FJSVxosmmm/sbin
+++ PATH=/opt/FJSVtclang/GM-1.2.0-19/bin:/usr/local/bin:/bin:/usr/bin:/opt/FJSVxosmmm/sbin
+++ export LD_LIBRARY_PATH=/opt/FJSVpnavi/sparc64fx/lib64
+++ LD_LIBRARY_PATH=/opt/FJSVpnavi/sparc64fx/lib64
+++ export LD_LIBRARY_PATH=/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64
+++ LD_LIBRARY_PATH=/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64
+++ export LD_LIBRARY_PATH=/opt/FJSVpxtof/sparc64fx/lib64:/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64
+++ LD_LIBRARY_PATH=/opt/FJSVpxtof/sparc64fx/lib64:/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64
+++ export LD_LIBRARY_PATH=/opt/FJSVpxtof/sparc64fx/lib64:/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64:/opt/FJSVXosSclib/lib64
+++ LD_LIBRARY_PATH=/opt/FJSVpxtof/sparc64fx/lib64:/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64:/opt/FJSVXosSclib/lib64
+++ export TMPDIR=./
+++ TMPDIR=./
+++ CPATH=/opt/FJSVtclang/check
+++ export PATH=/opt/FJSVtclang/check:/opt/FJSVtclang/GM-1.2.0-19/bin:/usr/local/bin:/bin:/usr/bin:/opt/FJSVxosmmm/sbin
+++ PATH=/opt/FJSVtclang/check:/opt/FJSVtclang/GM-1.2.0-19/bin:/usr/local/bin:/bin:/usr/bin:/opt/FJSVxosmmm/sbin
+++ echo Env_base: K-1.2.0-19
++++ echo /opt/FJSVtclang/check:/opt/FJSVtclang/GM-1.2.0-19/bin:/usr/local/bin:/bin:/usr/bin:/opt/FJSVxosmmm/sbin
++++ undup
++++ awk -F: '
+{
+	lang=0
+	delimiter=""
+	for(i=1;i<=NF;i++){
+		flag[i]=1
+		if(match($i,"/opt/FJSVtclang/GM-1.2.0-")!=0){
+			if(lang==0){
+				lang=1
+			}else{
+				flag[i]=0
+			}
+		}else{
+			for(j=1;j<i;j++){
+				if($j==$i){
+					flag[i] = 0
+					break;
+				}
+			}
+		}
+		if(flag[i]!=0){
+			printf("%s%s",delimiter,$i);
+			delimiter=":"
+		}
+	}
+}'
+++ PATH=/opt/FJSVtclang/check:/opt/FJSVtclang/GM-1.2.0-19/bin:/usr/local/bin:/bin:/usr/bin:/opt/FJSVxosmmm/sbin
++++ echo /opt/FJSVpxtof/sparc64fx/lib64:/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64:/opt/FJSVXosSclib/lib64
++++ undup
++++ awk -F: '
+{
+	lang=0
+	delimiter=""
+	for(i=1;i<=NF;i++){
+		flag[i]=1
+		if(match($i,"/opt/FJSVtclang/GM-1.2.0-")!=0){
+			if(lang==0){
+				lang=1
+			}else{
+				flag[i]=0
+			}
+		}else{
+			for(j=1;j<i;j++){
+				if($j==$i){
+					flag[i] = 0
+					break;
+				}
+			}
+		}
+		if(flag[i]!=0){
+			printf("%s%s",delimiter,$i);
+			delimiter=":"
+		}
+	}
+}'
+++ LD_LIBRARY_PATH=/opt/FJSVpxtof/sparc64fx/lib64:/opt/FJSVtclang/GM-1.2.0-19/lib64:/opt/FJSVpnavi/sparc64fx/lib64:/opt/FJSVXosSclib/lib64
+++ unset undup
++ mpiexec /work/system/bin/msh 'mkdir ./out'
++ mpiexec -n 82944 ./a.out 131072 131072
++ mpiexec -n 82944 ./a.out 262144 262144
++ mpiexec -n 82944 ./a.out 524288 524288
+[ERR.] PLE 0017 plexec The process terminated with the signal.(rank=0)(nid=0x01010010)(sig=24)

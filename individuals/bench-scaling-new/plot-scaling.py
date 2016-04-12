@@ -29,4 +29,4 @@ for fn in fns:
                     gbps=float(lines[i+2].split()[2])
                     break
         if gbps==0: continue
-        print gflips/gbps, fn
+        print gflips, fn, gbps,  gflips, gflips/gbps
