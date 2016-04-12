@@ -8,7 +8,6 @@ dc.getcontext().prec=4
 def read_cmd(cmd):
     p = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE)
     stdout_data, stderr_data = p.communicate()
-    print stdout_data
     return stdout_data
 
 fns = read_cmd('ls */out/output_prof_*.txt').split('\n')
@@ -17,6 +16,8 @@ def f(x):
     return str(dc.Decimal(x)+0)
 def p(x):
     return f(x*100) + '\%'
+
+data = {}
 
 for fn in fns:
     if fn=='': continue
@@ -27,7 +28,7 @@ for fn in fns:
         gflips = 0
         gbps = 0
 
-        fnbody = fn.split('/')[0]
+        key = fn.split('/')[0]
         for i in range(len(lines)):
             if re.search("MFLOPS\/PEAK",lines[i]):
                 if re.search("main 0",lines[i+2]):
@@ -39,4 +40,14 @@ for fn in fns:
                     gbps=float(lines[i+2].split()[2])
                     break
         if gbps==0: continue
-        print ' & '.join([fnbody,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)])
+        val = [gflips, gbps]
+        if key in data:
+            gf_other=data[key][0]
+            if gflips > gf_other:
+                data[key] = val
+        else:
+            data[key] = val
+
+for key,val in sorted(data.iteritems()) :
+    gflips, gbps = val
+    print ' & '.join([key,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)])
