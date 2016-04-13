@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import re,subprocess
+import re,subprocess,yaml
 import decimal as dc
 
 dc.getcontext().prec=4
@@ -29,6 +29,11 @@ for fn in fns:
         gbps = 0
 
         key = fn.split('/')[1]
+
+        idvfn = '/'.join(fn.split('/')[0:-2] + ['a.idv'])
+        with open(idvfn, 'r') as fp:
+            idv = yaml.load(fp)
+
         for i in range(len(lines)):
             if re.search("MFLOPS\/PEAK",lines[i]):
                 if re.search("main 0",lines[i+2]):
@@ -40,7 +45,7 @@ for fn in fns:
                     gbps=float(lines[i+2].split()[2])
                     break
         if gbps==0: continue
-        val = [gflips, gbps]
+        val = [gflips, gbps, idv]
         if key in data:
             gf_other=data[key][0]
             if gflips > gf_other:
@@ -49,5 +54,16 @@ for fn in fns:
             data[key] = val
 
 for key,val in sorted(data.iteritems()) :
-    gflips, gbps = val
-    print ' & '.join([key,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)])
+    gflips, gbps, idv = val
+    mpidata = idv['numerical_config']['mpi_grid_shape']
+    indata = idv['numerical_config']['intra_node_shape']
+    mpigrid = '${}$'.format('\\times'.join([str(n) for n in mpidata]))
+    ingrid = '${}$'.format('\\times'.join([str(n) for n in indata]))
+
+    totaldata=[1,1,1]
+    for i in [0,1,2]:
+        totaldata[i] = mpidata[i]*indata[i]
+    totalgrid = '${}$'.format('\\times'.join([str(n) for n in totaldata]))
+
+
+    print ' & '.join([key,mpigrid,ingrid,totalgrid,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)]) + '\\\\'
