@@ -71,7 +71,7 @@ void init() {
       }
     }
   }
-  }
+}
 
 void write_monitor() {
   int global_position[6];

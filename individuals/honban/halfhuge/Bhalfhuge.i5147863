@@ -1,0 +1,80 @@
+Job Information
+
+ JOB ID                    : 5147863
+ JOB NAME                  : Bhalfhuge
+ JOB TYPE                  : BATCH
+ JOB MODEL                 : NM
+ RETRY NUM                 : 0
+ SUB JOB NUM               : -
+ USER                      : a03209
+ GROUP                     : ra000008
+ RESOURCE UNIT             : common
+ RESOURCE GROUP            : huge
+ PRIORITY                  : 220
+ SHELL                     : /bin/bash
+ COMMENT                   : 
+ LAST STATE                : QUE
+ STATE                     : CCL
+ PRM DATE                  : -
+ EXIT CODE                 : 0
+ SIGNAL NO                 : 0
+ PJM CODE                  : 1
+ REASON                    : RSCGRP STOP
+ MAIL SEND FLAG            : ----
+ MAIL ADDRESS              : a03209
+ STEP DEPENDENCY EXP       : -
+ STEP EXITING WAIT MODE    : -
+ FILE MASK                 : 0022
+ STANDARD OUT FILE         : /volume81/data/ra000008/nushio/individuals/honban/halfhuge/Bhalfhuge.o5147863
+ STANDARD ERR FILE         : /volume81/data/ra000008/nushio/individuals/honban/halfhuge/Bhalfhuge.e5147863
+ INFORMATION FILE          : /volume81/data/ra000008/nushio/individuals/honban/halfhuge/Bhalfhuge.i5147863
+ ACCEPT DATE               : 2016/04/14 13:40:25
+ QUEUED DATE               : 2016/04/14 13:40:26
+ EXIT DATE                 : 2016/04/14 13:46:22
+ LAST HOLD USER            : 
+ HOLD NUM                  : 0
+ HOLD TIME                 : 00:00:00 (0)
+ JOB START DATE            : -
+ JOB END DATE              : -
+ STAGE IN START DATE       : -
+ STAGE IN END DATE         : -
+ STAGE IN SIZE             : 0.0 MB (0)
+ STAGE OUT START DATE      : -
+ STAGE OUT END DATE        : -
+ STAGE OUT SIZE            : 0.0 MB (0)
+ NODE NUM (REQUIRE)        : 41472:48x32x27
+ CPU NUM (REQUIRE)         : 331776
+ ELAPSE TIME (LIMIT)       : 01:00:00 (3600)
+ MEMORY SIZE (LIMIT)       : 14252.7 MiB (14945000000) <DEFAULT>
+ DISK SIZE (LIMIT)         : 14000.0 MB (14000000000) <DEFAULT>
+ CPU TIME (LIMIT)          : unlimited <DEFAULT>
+ PROC CPU LIMIT            : unlimited <DEFAULT>
+ PROC COREFILE LIMIT       : 0.0 MB (0) <DEFAULT>
+ PROC CREATE PROC LIMIT    : 512 <DEFAULT>
+ PROC DATA LIMIT           : unlimited <DEFAULT>
+ PROC LOCKED MEMORY LIMIT  : unlimited <DEFAULT>
+ PROC MESSAGE QUEUE LIMIT  : unlimited <DEFAULT>
+ PROC OPEN FILES LIMIT     : 1024 <DEFAULT>
+ PROC PENDING SIGNAL LIMIT : unlimited <DEFAULT>
+ PROC PERMFILE LIMIT       : unlimited <DEFAULT>
+ PROC STACK LIMIT          : 14252.7 MiB (14945000000) <DEFAULT>
+ PROC VIRTUAL MEMORY LIMIT : unlimited <DEFAULT>
+ NODE NUM (ALLOC)          : 0
+ MEMORY SIZE (ALLOC)       : 0.0 MiB (0)
+ CPU NUM (ALLOC)           : 0
+ ELAPSE TIME (USE)         : 00:00:00 (0)
+ NODE NUM (UNUSED)         : 0
+ NODE NUM (USE)            : 0
+ NODE ID (USE)             : -
+ TOFU COORDINATE (USE)     : -
+ MAX MEMORY SIZE (USE)     : 0.0 MiB (0)
+ CPU NUM (USE)             : 0
+ USER CPU TIME (USE)       : 0 ms
+ SYSTEM CPU TIME (USE)     : 0 ms
+ CPU TIME (TOTAL)          : 0 ms
+ DISK SIZE (USE)           : -
+ I/O SIZE                  : 0.0 MB (0)
+ FILE I/O SIZE             : 0.0 MB (0)
+ EXEC INST NUM             : 0
+ EXEC SIMD NUM             : 0
+

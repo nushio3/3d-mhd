@@ -13,9 +13,15 @@ def read_cmd(cmd):
 fns = read_cmd(' '.join(
     ['ls bench-scaling-new/*/out/output_prof_*.txt'
      ,'survey4^4/sv25/out/output_prof_*.txt'
+     ,'survey4^4/zen4/out/output_prof_*.txt'
      ,'survey4^4/ptd-444/out/output_prof_*.txt'
      ,'understand/pt-115/out/output_prof_*.txt'
     ])).split('\n')
+
+# fns = read_cmd(' '.join(
+#     ['ls survey4^4/*/out/output_prof_*.txt'
+#     ])).split('\n')
+
 
 def f(x):
     return str(dc.Decimal(x)+0)
@@ -36,8 +42,11 @@ for fn in fns:
         key = fn.split('/')[1]
 
         idvfn = '/'.join(fn.split('/')[0:-2] + ['a.idv'])
-        with open(idvfn, 'r') as fp:
-            idv = yaml.load(fp)
+        try:
+            with open(idvfn, 'r') as fp:
+                idv = yaml.load(fp)
+        except:
+            continue
 
         for i in range(len(lines)):
             if re.search("MFLOPS\/PEAK",lines[i]):
@@ -71,4 +80,4 @@ for key,val in sorted(data.iteritems()) :
     totalgrid = '${}$'.format('\\times'.join([str(n) for n in totaldata]))
 
 
-    print ' & '.join([key,mpigrid,ingrid,totalgrid,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)]) + '\\\\'
+    print gflips/gbps, ' & '.join([key,mpigrid,ingrid,totalgrid,f(gbps), p(gbps/64), f(gflips), p(gflips/64), f(gflips/gbps)]) + '\\\\'
