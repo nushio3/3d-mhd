@@ -55,9 +55,18 @@ for fn in sys.argv[2:]:
         secy_v = tmp.reshape(sx,sz,1)
         print secy_u
         key = (t,x,y,z)
-        img_r = secy_u
-        img_g = np.minimum(1.0,secy_v*3.0)
-        img_b = np.minimum(0.5,secy_v**0.2)
+
+        peak = 4 * (secy_v**2)
+        colony = secy_v*3.0
+        aura = 0.3 * secy_v**0.2
+        food = secy_u
+        img_r = np.minimum(1.0, peak + food)
+        img_g = np.minimum(1.0, peak + colony)
+        img_b = np.minimum(1.0, peak + aura)
+        #img_b = secy_v*0.0
+        #img_b[secy_v>0.01]=0.5
+        #img_r[secy_v>0.01]=0.0
+        #img_g *= 0.0
         val = np.concatenate((img_r,img_g,img_b),axis=2)
         secs_y[key] = val
 
@@ -85,6 +94,7 @@ for t in t_ax:
             continue
         canvas[x1:x1+sx,z1:z1+sz,:] = val
     wh = (canvas_size_z/100.0,canvas_size_x/100.0)
+    #wh = (canvas_size_z/20.0,canvas_size_x/20.0)
     print wh
     pylab.rcParams['figure.figsize'] = wh
     pylab.clf()

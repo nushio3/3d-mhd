@@ -10,7 +10,12 @@ def read_cmd(cmd):
     stdout_data, stderr_data = p.communicate()
     return stdout_data
 
-fns = read_cmd('ls bench-scaling-new/*/out/output_prof_*.txt').split('\n')
+fns = read_cmd(' '.join(
+    ['ls bench-scaling-new/*/out/output_prof_*.txt'
+     ,'survey4^4/sv25/out/output_prof_*.txt'
+     ,'survey4^4/ptd-444/out/output_prof_*.txt'
+     ,'understand/pt-115/out/output_prof_*.txt'
+    ])).split('\n')
 
 def f(x):
     return str(dc.Decimal(x)+0)
