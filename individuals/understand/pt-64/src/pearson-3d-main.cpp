@@ -31,48 +31,86 @@ double wctime() {
   return (double)tv.tv_sec + (double)tv.tv_usec*1e-6;
 }
 /*
-void init() {
+  void init() {
   for(int ix = navi.lower_x; ix < navi.upper_x; ++ix) {
-    for(int iy = navi.lower_y; iy < navi.upper_y; ++iy) {
-      for(int iz = navi.lower_z; iz < navi.upper_z; ++iz) {
-        double x = double(navi.offset_x + ix)/NX;
-        double y = double(navi.offset_y + iy)/NY;
-        double z = double(navi.offset_z + iz)/NZ;
-        U[ix][iy][iz] = 1.0;
-        V[ix][iy][iz] = 0.0;
-        if (z > 0.49 && z < 0.51 && x > 0.4 && x < 0.6) {
-          U[ix][iy][iz] = 0.5;
-          V[ix][iy][iz] = 0.25;
-        }
-      }
-    }
+  for(int iy = navi.lower_y; iy < navi.upper_y; ++iy) {
+  for(int iz = navi.lower_z; iz < navi.upper_z; ++iz) {
+  double x = double(navi.offset_x + ix)/NX;
+  double y = double(navi.offset_y + iy)/NY;
+  double z = double(navi.offset_z + iz)/NZ;
+  U[ix][iy][iz] = 1.0;
+  V[ix][iy][iz] = 0.0;
+  if (z > 0.49 && z < 0.51 && x > 0.4 && x < 0.6) {
+  U[ix][iy][iz] = 0.5;
+  V[ix][iy][iz] = 0.25;
   }
-}*/
+  }
+  }
+  }
+  }*/
+
+
+double gaussian(double x, double y,double z) {
+  double d = sqrt(x*x+y*y+z*z);
+  return 1.0/(1.0+exp( (d-3.0)*3.0 ));
+}
 
 
 typedef pair<int,pair<int,int> > Key;
+
 void init() {
-  map<Key ,double> seeds;
-  for(int ix = navi.lower_x; ix < navi.upper_x; ++ix) {
-    for(int iy = navi.lower_y; iy < navi.upper_y; ++iy) {
-      for(int iz = navi.lower_z; iz < navi.upper_z; ++iz) {
-        Key k (ix/16, pair<int,int>(iy/16, iz/16));
-        U[ix][iy][iz] = 1.0;
-        V[ix][iy][iz] = 0.0;
-        double s = seeds[k];
-        if (s==0) {
-          s = frand();
-          seeds[k]=s;
+  if (NZ<500){
+    const int NI=4,NJ=7;
+    double oxs[NI*NJ], pat_x[NI] = {230,80, 40,170};
+    double oys[NI*NJ], pat_y[NI] = {131,131,131,131};
+    double ozs[NI*NJ], pat_z[NI] = { 50,80,120,190};
+    for (int i=0;i<NI;++i) {
+      for (int j=0;j<NJ;++j) {
+        oxs[j*4+i] = pat_x[i] + 2.0 * j*(2*frand()-1);
+        oys[j*4+i] = pat_y[i] + 2.0 * j*(2*frand()-1);
+        ozs[j*4+i] = pat_z[i] + 2.0 * j*(2*frand()-1);
+      }
+    }
+
+    for(int ix = navi.lower_x; ix < navi.upper_x; ++ix) {
+      for(int iy = navi.lower_y; iy < navi.upper_y; ++iy) {
+        for(int iz = navi.lower_z; iz < navi.upper_z; ++iz) {
+          U[ix][iy][iz] = 1.0;
+          V[ix][iy][iz] = 0.0;
+          double g=0;
+          for (int i=0;i<NI*NJ;++i) {
+            double oz=ozs[i], oy=oys[i],ox=oxs[i];
+            g += gaussian(iz-oz, ix-ox ,iy-oy);
+          }
+          if (g>=1.0) g=1.0;
+          U[ix][iy][iz] -= 0.5 *g;
+          V[ix][iy][iz] += 0.25 *g;
+
         }
-        if (s < 0.1 ) {
-          U[ix][iy][iz] = 0.5;
-          V[ix][iy][iz] = 0.25;
+      }
+    }
+  }else{
+    map<Key ,double> seeds;
+    for(int ix = navi.lower_x; ix < navi.upper_x; ++ix) {
+      for(int iy = navi.lower_y; iy < navi.upper_y; ++iy) {
+        for(int iz = navi.lower_z; iz < navi.upper_z; ++iz) {
+          Key k (ix/16, pair<int,int>(iy/16, iz/16));
+          U[ix][iy][iz] = 1.0;
+          V[ix][iy][iz] = 0.0;
+          double s = seeds[k];
+          if (s==0) {
+            s = frand();
+            seeds[k]=s;
+          }
+          if (s < 0.1 ) {
+            U[ix][iy][iz] = 0.5;
+            V[ix][iy][iz] = 0.25;
+          }
         }
       }
     }
   }
-  }
-
+}
 void write_monitor() {
   int global_position[6];
   global_position[0] = navi.offset_x + navi.lower_x;
@@ -169,7 +207,7 @@ int main (int argc, char **argv) {
         T_MAX*=2;
         T_MONITOR*=2;
         sprintf(benchmark_name,"extend-%d",T_MAX);
-        //start_collection(benchmark_name);
+        start_collection(benchmark_name);
         fapp_start(benchmark_name, 0,0);
       }else{
         break;
@@ -178,7 +216,7 @@ int main (int argc, char **argv) {
     }
     if (navi.time_step == 0) {
       t_begin = wctime();
-      //start_collection(benchmark_name);
+      start_collection(benchmark_name);
       fapp_start(benchmark_name, 0,0);
     }
 
@@ -188,11 +226,11 @@ int main (int argc, char **argv) {
 
     if (navi.time_step >= T_MAX) {
       t_end = wctime();
-      //stop_collection(benchmark_name);
+      stop_collection(benchmark_name);
       fapp_stop(benchmark_name, 0,0);
     }
   }
-  printf("total wct = %lf sec\n",t_end - t_begin);
+  //printf("total wct = %lf sec\n",t_end - t_begin);
 
   MPI_Barrier(MPI_COMM_WORLD);
   MPI_Finalize();
