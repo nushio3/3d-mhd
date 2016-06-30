@@ -1,0 +1,15 @@
+compiler_flags: ['-Cpp', '-Kfast','-Kparallel',  '-Kopenmp', '-Koptmsg=2', '-Kreduction', '-Ksimd=2', '-O3']
+cpp_sourcecode_url: /home/nushio/hub/formura/examples/main.f90
+fmr_sourcecode_url: /home/nushio/hub/formura/examples/finalist.fmr
+base_filename: finalist.fmr
+formura_version: c59cfbc46b4639eafa0d1824b424be0b9c5305f1
+numerical_config:
+  initial_walls:
+    x: [100]
+    y: [100]
+    z: [100]
+  intra_node_shape: [200,200,200]
+  monitor_interval: 32
+  mpi_grid_shape: [4,4,4]
+  temporal_blocking_interval: 8
+  option_strings: ['stick-single-comp', 'no-subroutine']
