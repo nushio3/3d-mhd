@@ -1,0 +1,23 @@
+initial_walls:
+  x:
+  - 36
+  y:
+  - 36
+  z:
+  - 12
+  - 20
+intra_node_shape:
+- 64
+- 48
+- 24
+monitor_interval: 32
+mpi_grid_shape:
+- 4
+- 4
+- 4
+option_strings:
+- irank-order-f
+- stick-single-comp
+- no-subroutine
+- nbuz2
+temporal_blocking_interval: 4
