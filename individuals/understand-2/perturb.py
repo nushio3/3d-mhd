@@ -49,12 +49,6 @@ def gen(best_yaml,flags,monitor_interval,xsize, ysize, zsize, cascade,opts,tb):
             return
         if zsize/2 <= tb:
             return
-    dirn = ''
-    while True:
-        dirn = "pt-" +str(ctr)
-        if not(os.path.exists(dirn)):
-            break
-        ctr+=1
 
     subprocess.call("mkdir " + dirn, shell = True)
     fn = dirn + "/a.idv"
@@ -84,6 +78,12 @@ numerical_config:
     if con in past_idv:
         print "duplicate content detected"
     else:
+        dirn = ''
+        while True:
+            dirn = "pt-" +str(ctr)
+            if not(os.path.exists(dirn)):
+                break
+        ctr+=1
         print "generating", fn
         with open(fn,"w") as fp:
             fp.write(con)
@@ -129,9 +129,9 @@ if len(sys.argv) >=2:
 else:
     choice = random.random()
     best_idx=-2
-    if choice < 0.6:
+    if choice < 0.2:
         best_idx=-2
-    elif choice < 0.65:
+    elif choice < 0.25:
         best_idx = int(len(canditates)*random.random())
     else:
         decay = 0.001 ** random.random()
