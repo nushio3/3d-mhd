@@ -50,8 +50,6 @@ def gen(best_yaml,flags,monitor_interval,xsize, ysize, zsize, cascade,opts,tb):
         if zsize/2 <= tb:
             return
 
-    subprocess.call("mkdir " + dirn, shell = True)
-    fn = dirn + "/a.idv"
     con = """
 compiler_flags: {flags}
 cpp_sourcecode_url: {cpp_sourcecode_url}
@@ -79,11 +77,15 @@ numerical_config:
         print "duplicate content detected"
     else:
         dirn = ''
+
         while True:
             dirn = "pt-" +str(ctr)
             if not(os.path.exists(dirn)):
                 break
-        ctr+=1
+            ctr+=1
+
+        subprocess.call("mkdir " + dirn, shell = True)
+        fn = dirn + "/a.idv"
         print "generating", fn
         with open(fn,"w") as fp:
             fp.write(con)
