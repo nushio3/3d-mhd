@@ -17,7 +17,7 @@ compiler_flags0 = ['-O3','-KNOFLTLD', '-Kpic','-KPIC','-KXFILL','-Kalias_const',
 
 global ctr, past_idv
 ctr=0
-def gen(best_yaml,flags,monitor_interval,xsize, ysize, zsize, cascade,opts,tb):
+def gen(best_yaml,formura_version,flags,monitor_interval,xsize, ysize, zsize, cascade,opts,tb):
     global ctr, past_idv
     if cascade == 0:
         xs = [xsize/2+tb]
@@ -67,7 +67,7 @@ numerical_config:
   temporal_blocking_interval: {tb}
   option_strings: {opts}
 """.format(flags=flags,xs=xs,ys=ys,zs=zs, x=xsize,y=ysize,z=zsize,opts=opts,tb=tb,
-           formura_version=best_yaml['formura_version'],
+           formura_version=formura_version,
            monitor_interval=monitor_interval,
            fmr_sourcecode_url=best_yaml['fmr_sourcecode_url'],
            cpp_sourcecode_url=best_yaml['cpp_sourcecode_url'])
@@ -163,6 +163,9 @@ zsize0 = best_yaml['numerical_config']['intra_node_shape'][2]
 tb0 = best_yaml['numerical_config']['temporal_blocking_interval']
 monitor_interval0= best_yaml['numerical_config']['monitor_interval']
 opts0 = best_yaml['numerical_config']['option_strings']
+formura_version0=best_yaml['formura_version']
+
+
 
 cascade0 = 2
 if len(best_yaml['numerical_config']['initial_walls']['x'])>=2:
@@ -190,10 +193,12 @@ for f in compiler_flags0:
     flagss.append(sorted(fs))
 
 
+
 for flags in flagss:
  for monitor_interval in [monitor_interval0,monitor_interval0*2,monitor_interval0/2,monitor_interval0+16,monitor_interval0-16]:
   for opts in optss:
     for xsize in [xsize0/2,xsize0-8,xsize0-2,xsize0-1,xsize0,xsize0+1,xsize0+2,xsize0+8,xsize0*2]:
+     for formura_version in ['880a48226ddecd8dbee4c64e0133102b316e315d','83b8b54104ccf76ec40b5bce2facce06e2b4cc70']:
       for ysize in [ysize0/2,ysize0-8,ysize0-2,ysize0-1,ysize0,ysize0+1,ysize0+2,ysize0+8,ysize0*2]:
         for zsize in [zsize0/2,zsize0-8,zsize0-2,zsize0-1,zsize0,zsize0+1,zsize0+2,zsize0+8,zsize0*2]:
             if xsize >= zsize/4 or xsize<=0 or zsize<=0:
@@ -205,6 +210,9 @@ for flags in flagss:
                         continue
 
                     err_ctr=0
+                    if formura_version != formura_version0:
+                        err_ctr+=1
+
                     if sorted(flags) != sorted(flags0):
                         err_ctr+=1
                     if monitor_interval != monitor_interval0:
@@ -223,4 +231,4 @@ for flags in flagss:
                         err_ctr+=1
                     if err_ctr>=3 or (err_ctr==2 and random.random() >0.01):
                         continue
-                    gen(best_yaml,flags,monitor_interval, xsize,ysize,zsize,cascade,opts,tb)
+                    gen(best_yaml,formura_version,flags,monitor_interval, xsize,ysize,zsize,cascade,opts,tb)
